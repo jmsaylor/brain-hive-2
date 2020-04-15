@@ -2,10 +2,11 @@ import React from "react";
 
 const Post = ({ post }) => {
   return (
-    <div className={"box"}>
+    <div className='box'>
       <h1>{post.title}</h1>
       <p>{post.resourceAuthor}</p>
       {post.videoLength ? <p>Length: {post.videoLength}</p> : null}
+      <p>Description: {post.summary}</p>
       <p>Rating: {post.rating}</p>
       <p>Comments: {post.comments.length}</p>
     </div>
