@@ -1,22 +1,35 @@
 import React, { Component } from "react";
 import "./App.css";
-import Post from "./components/Post";
+import PostList from "./components/PostList";
+import NavBar from "./components/NavBar";
 import posts from "./mock/examplePosts";
+import Form from "./components/Form";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
-  renderPosts = () => {
-    const display = posts.map((post) => {
-      return <Post post={post} />;
+  state = {
+    posts: [...posts],
+  };
+
+  addPost = (post) => {
+    this.setState({
+      posts: [...posts, post],
     });
-    return display;
   };
 
   render() {
     return (
-      <div className='App'>
-        <h1>BRAIN HIVE</h1>
-        <div className='postList'>{this.renderPosts()}</div>
-      </div>
+      <BrowserRouter>
+        <NavBar />
+        <Switch>
+          <Route path='/' exact>
+            <PostList posts={this.state.posts} />
+          </Route>
+          <Route>
+            <Form addPost={this.addPost} />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
