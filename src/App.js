@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import posts from "./mock/examplePosts";
 import Form from "./components/Form";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Background from "./components/Background";
 
 class App extends Component {
   state = {
@@ -20,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        {/* <Background /> */}
         <NavBar />
         <Switch>
           <Route path='/' exact>
