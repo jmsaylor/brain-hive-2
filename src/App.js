@@ -3,6 +3,7 @@ import "./App.css";
 import PostList from "./components/PostList";
 import NavBar from "./components/NavBar";
 import posts from "./mock/examplePosts";
+import Post from "./components/Post";
 import Form from "./components/Form";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Background from "./components/Background";
@@ -30,7 +31,9 @@ class App extends Component {
           <Route path='/add' exact>
             <Form addPost={this.addPost} />
           </Route>
-          <Route></Route>
+          <Route path='/post/:id' exact>
+            <Post posts={this.state.posts} />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
