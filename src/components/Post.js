@@ -1,6 +1,8 @@
 import React from "react";
 
-const Post = ({ post }) => {
+const Post = ({ post, match }) => {
+  // const id = match.params.id;
+  // console.log(id);
   return (
     <div className='box'>
       <h1>{post.title}</h1>

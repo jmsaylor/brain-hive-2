@@ -27,9 +27,10 @@ class App extends Component {
           <Route path='/' exact>
             <PostList posts={this.state.posts} />
           </Route>
-          <Route>
+          <Route path='/add' exact>
             <Form addPost={this.addPost} />
           </Route>
+          <Route></Route>
         </Switch>
       </BrowserRouter>
     );
