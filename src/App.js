@@ -14,24 +14,23 @@ class App extends Component {
     posts: [...posts],
   };
 
-  componentDidMount() {
-    let arr = [...this.state.posts];
-    let count = 0;
-    arr.forEach((element) => {
-      element.id = count;
-      element.key = count;
-      count++;
-    });
-    this.setState({
-      posts: [...arr],
-    });
-  }
-
   addPost = (post) => {
     this.setState({
       posts: [...posts, post],
     });
   };
+
+  componentDidMount() {
+    let arr = [...posts];
+    arr.forEach((element, idx) => {
+      element.id = idx;
+      element.key = idx;
+    });
+    this.setState({
+      posts: [...arr],
+    });
+    console.log(this.state.posts);
+  }
 
   render() {
     return (
