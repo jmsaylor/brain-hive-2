@@ -4,7 +4,11 @@ import Post from "./Post";
 const PostList = ({ posts }) => {
   const renderPosts = () => {
     const display = posts.map((post) => {
-      return <Post post={post} />;
+      return (
+        <div id={post.id} key={post.key}>
+          <Post post={post} />;
+        </div>
+      );
     });
     return display;
   };

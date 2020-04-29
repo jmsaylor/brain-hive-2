@@ -3,15 +3,29 @@ import "./App.css";
 import PostList from "./components/PostList";
 import NavBar from "./components/NavBar";
 import posts from "./mock/examplePosts";
-import Post from "./components/Post";
+import SinglePost from "./components/SinglePost";
+import SearchBar from "./components/SearchBar";
 import Form from "./components/Form";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Background from "./components/Background";
+// import Background from "./components/Background";
 
 class App extends Component {
   state = {
     posts: [...posts],
   };
+
+  componentDidMount() {
+    let arr = [...this.state.posts];
+    let count = 0;
+    arr.forEach((element) => {
+      element.id = count;
+      element.key = count;
+      count++;
+    });
+    this.setState({
+      posts: [...arr],
+    });
+  }
 
   addPost = (post) => {
     this.setState({
@@ -24,6 +38,7 @@ class App extends Component {
       <BrowserRouter>
         {/* <Background /> */}
         <NavBar />
+        <SearchBar />
         <Switch>
           <Route path='/' exact>
             <PostList posts={this.state.posts} />
@@ -31,8 +46,8 @@ class App extends Component {
           <Route path='/add' exact>
             <Form addPost={this.addPost} />
           </Route>
-          <Route path='/post/:id' exact>
-            <Post posts={this.state.posts} />
+          <Route path='/post/:id'>
+            <SinglePost posts={this.state.posts} />
           </Route>
         </Switch>
       </BrowserRouter>

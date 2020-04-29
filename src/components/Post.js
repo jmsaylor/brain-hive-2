@@ -1,21 +1,20 @@
 import React from "react";
 
-const Post = (props) => {
-  // const id = match.params.id;
-  // console.log(id);
-  // const post = posts[id];
-  console.log(props);
-  // console.log(match.params);
+const Post = ({ post }) => {
   return (
-    <div></div>
-    // <div className='box'>
-    //   <h1>{post.title}</h1>
-    //   <p>{post.resourceAuthor}</p>
-    //   {post.videoLength ? <p>Length: {post.videoLength}</p> : null}
-    //   <p>Description: {post.summary}</p>
-    //   <p>Rating: {post.rating}</p>
-    //   <p>Comments: {post.comments.length}</p>
-    // </div>
+    <div className='box' id={post.id} key={post.key}>
+      <h1>{post.title}</h1>
+      <p>{post.resourceAuthor}</p>
+      {post.videoLength ? <p>Length: {post.videoLength}</p> : null}
+      {post.link ? (
+        <div>
+          <a href={post.link}>link</a>
+        </div>
+      ) : null}
+      <p>Description: {post.summary}</p>
+      <p>Rating: {post.rating}</p>
+      <p>Comments: {post.comments.length}</p>
+    </div>
   );
 };
 
