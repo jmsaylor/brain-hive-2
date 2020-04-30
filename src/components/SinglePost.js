@@ -18,6 +18,16 @@ class SinglePost extends Component {
       showComments: !this.state.showComments,
     });
   };
+  renderComments = (post) => {
+    return post.comments.map((comment) => {
+      return (
+        <div className='box'>
+          <p>{comment.name}</p>
+          <p>{comment.text}</p>
+        </div>
+      );
+    });
+  };
 
   componentDidMount() {
     console.log(this.state);
@@ -44,7 +54,7 @@ class SinglePost extends Component {
           <Button onClick={() => this.clickHandler()}>
             {this.state.showComments ? "Click to Hide" : "Click to show"}
           </Button>
-          {this.state.showComments ? "Showing" : "Not showing"}
+          {this.state.showComments ? this.renderComments(post) : null}
         </div>
       );
     });

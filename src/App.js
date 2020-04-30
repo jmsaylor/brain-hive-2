@@ -17,7 +17,10 @@ class App extends Component {
       element.key = idx;
       element.id = String(idx);
     });
-    this.state = { posts: [...arr] };
+    this.state = {
+      posts: [...arr],
+      search: "",
+    };
   }
 
   addPost = (post) => {
