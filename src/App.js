@@ -10,9 +10,15 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import Background from "./components/Background";
 
 class App extends Component {
-  state = {
-    posts: [...posts],
-  };
+  constructor(props) {
+    super(props);
+    let arr = [...posts];
+    arr.forEach((element, idx) => {
+      element.key = idx;
+      element.id = String(idx);
+    });
+    this.state = { posts: [...arr] };
+  }
 
   addPost = (post) => {
     this.setState({
@@ -21,14 +27,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    let arr = [...posts];
-    arr.forEach((element, idx) => {
-      element.id = idx;
-      element.key = idx;
-    });
-    this.setState({
-      posts: [...arr],
-    });
     console.log(this.state.posts);
   }
 

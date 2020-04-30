@@ -7,13 +7,19 @@ const SinglePost = (props) => {
   const { id } = useParams();
   // posts = posts.filter((elem) => elem.id === id);
   console.log("id:", id, typeof id);
-  console.log(posts[0].id);
+
+  posts.forEach((element) => {
+    console.log(element.id, id);
+  });
+
+  posts = posts.filter((element) => element.id === id);
+
+  console.log(posts);
+
   const renderPosts = () => {
-    const display = posts
-      .filter((elem) => elem[id] === 1)
-      .map((post) => {
-        return <Post post={post} />;
-      });
+    const display = posts.map((post) => {
+      return <Post post={post} key={post.key} />;
+    });
     return display;
   };
   return <div className='postList'>{renderPosts()}</div>;

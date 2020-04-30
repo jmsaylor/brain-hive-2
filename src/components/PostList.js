@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post";
 
 const PostList = ({ posts }) => {
-  const renderPosts = () => {
+  const renderPosts = (param) => {
     const display = posts.map((post) => {
       return (
         <div id={post.id} key={post.key}>
