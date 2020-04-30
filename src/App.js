@@ -43,7 +43,7 @@ class App extends Component {
           <Route path='/add' exact>
             <Form addPost={this.addPost} />
           </Route>
-          <Route path='/post/:id'>
+          <Route path='/post/:postId'>
             <SinglePost posts={this.state.posts} />
           </Route>
         </Switch>
