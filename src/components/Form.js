@@ -10,14 +10,14 @@ class PostForm extends Component {
     summary: "",
     link: "",
     resourceType: "",
-    datePublished: null,
+    datePublished: "",
     videoLength: "",
     timeToComplete: "",
     rating: "",
     comments: "",
   };
   handleChange = (e) => {
-    console.log(this.state);
+    // console.log(this.state);
     this.setState({
       ...this.state,
       [e.target.id]: e.target.value,
@@ -26,7 +26,9 @@ class PostForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let post = this.state;
+    const post = { ...this.state };
+    post.categories = post.categories.split(",");
+    console.log("formPost", post);
     this.props.addPost(post);
   };
 
@@ -36,6 +38,7 @@ class PostForm extends Component {
         <form style={myStyles.form} onSubmit={(e) => this.handleSubmit(e)}>
           {/* <label htmlFor="posterName">Your Name: </label> */}
           <input
+            style={myStyles.input}
             type='text'
             id='posterName'
             placeholder='Your Name'
@@ -43,6 +46,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='resourceAuthor'
             placeholder='Author Name'
@@ -50,7 +54,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           {/* dropdown skill level */}
-          <div>
+          <div style={myStyles.input}>
             <select>
               <option value='' disabled>
                 Author skill level
@@ -61,6 +65,7 @@ class PostForm extends Component {
             </select>
           </div>
           <input
+            style={myStyles.input}
             type='text'
             id='cohort'
             placeholder='Cohort #'
@@ -68,6 +73,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='title'
             placeholder='title'
@@ -75,6 +81,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='categories'
             placeholder='Categories (seperate multiple with commas)'
@@ -82,6 +89,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='link'
             placeholder='Resource Link'
@@ -89,6 +97,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='resourceType'
             placeholder='Resource Type'
@@ -96,6 +105,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='date'
             id='datePublished'
             placeholder='Published Date'
@@ -103,6 +113,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='videoLength'
             placeholder='Length of Video (optional)'
@@ -110,6 +121,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='timeToComplete'
             placeholder='Time to complete resource'
@@ -117,6 +129,7 @@ class PostForm extends Component {
             onChange={(e) => this.handleChange(e)}
           />
           <input
+            style={myStyles.input}
             type='text'
             id='rating'
             placeholder='1 to 5 rating'
@@ -129,12 +142,22 @@ class PostForm extends Component {
     );
   }
 }
+
+export default PostForm;
+
 const myStyles = {
   form: {
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    marginRight: "20%",
+    marginLeft: "20%",
+    flexDirection: "column",
+  },
+  input: {
+    width: "70%",
+    height: 32,
+    fontSize: 20,
+    marginBottom: 4,
   },
 };
-export default PostForm;

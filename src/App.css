@@ -1,5 +1,10 @@
 body {
-  background-color: rgba(190, 255, 219, 0.4);
+  background: radial-gradient(khaki 40px, transparent 0, transparent 100%),
+    radial-gradient(skyblue 40px, transparent 0, transparent 100%),
+    radial-gradient(pink 40px, transparent 0, transparent 100%), snow;
+  background-blend-mode: multiply;
+  background-size: 100px 100px;
+  background-position: 0 0, 33px 33px, -33px -33px;
 }
 .App {
   text-align: center;
@@ -9,6 +14,17 @@ body {
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+.NavBar {
+  background-color: rgba(255, 255, 255, 0.4);
+  font: larger;
+  text-shadow: bisque;
+  text-align: center;
+}
+
+.SearchBar {
+  background-color: rgba(100, 100, 100, 0.4);
+  text-align: right;
 }
 
 .App-header {
@@ -40,8 +56,39 @@ body {
   justify-content: space-around;
 }
 
-canvas {
-  display: block;
-  width: 100vw;
-  height: 100vh;
+.circles-background {
+  background: radial-gradient(khaki 40px, transparent 0, transparent 100%),
+    radial-gradient(skyblue 40px, transparent 0, transparent 100%),
+    radial-gradient(pink 40px, transparent 0, transparent 100%), snow;
+  background-blend-mode: multiply;
+  background-size: 100px 100px;
+  background-position: 0 0, 33px 33px, -33px -33px;
+}
+
+.plaid-background {
+  background: repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 25%,
+      dodgerblue 0,
+      dodgerblue 50%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 25%,
+      tomato 0,
+      tomato 50%
+    ),
+    repeating-linear-gradient(transparent 0, transparent 25%, gold 0, gold 50%),
+    white;
+  background-blend-mode: multiply;
+  background-size: 100px 100px;
+}
+
+.spectrum-background {
+  background: linear-gradient(red, transparent),
+    linear-gradient(to top left, lime, transparent),
+    linear-gradient(to top right, blue, transparent);
+  background-blend-mode: screen;
 }

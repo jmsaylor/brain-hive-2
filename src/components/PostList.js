@@ -1,12 +1,19 @@
 import React from "react";
 import Post from "./Post";
 
-const PostList = ({ posts }) => {
+const PostList = (props) => {
+  const { posts } = props;
   const renderPosts = (param) => {
     const display = posts.map((post) => {
       return (
-        <div id={post.id} key={post.key}>
-          <Post post={post} />;
+        <div>
+          <Post
+            post={post}
+            id={post.id}
+            key={post.key}
+            handleSelect={props.handleSelect}
+          />
+          ;
         </div>
       );
     });

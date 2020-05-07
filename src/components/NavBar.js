@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// import { Button } from "./common/Button";
 
 const NavBar = () => {
   return (
@@ -7,9 +8,9 @@ const NavBar = () => {
       <h1 id='brand'>
         <Link to='/'>BrainHive</Link>
       </h1>
-      <div id='navigation'>
-        <Link to='/add'>Contribute</Link>
-      </div>
+      {/* <Button> */}
+      <Link to='/add'>Contribute</Link>
+      {/* </Button> */}
     </div>
   );
 };

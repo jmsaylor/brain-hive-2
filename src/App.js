@@ -6,9 +6,8 @@ import posts from "./mock/examplePosts";
 import SinglePost from "./components/SinglePost";
 import SearchBar from "./components/SearchBar";
 import Form from "./components/Form";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 // import Background from "./components/Background";
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,29 +18,48 @@ class App extends Component {
     });
     this.state = {
       posts: [...arr],
-      search: "",
+      search: null,
+      searchResults: [...arr],
     };
   }
 
   addPost = (post) => {
+    post.id = this.state.posts.length;
+    console.log("post", post);
     this.setState({
-      posts: [...posts, post],
+      ...this.state,
+      posts: [...this.state.posts, post],
     });
   };
 
-  componentDidMount() {
-    console.log(this.state.posts);
-  }
+  handleSearch = (e) => {
+    let query = e.target.value;
+    query = query.toLowerCase();
+    const newPosts = this.state.posts.filter(
+      (post) =>
+        post.title.toLowerCase().indexOf(query) >= 0 ||
+        post.summary.toLowerCase().indexOf(query) >= 0 ||
+        post.categories.join().toLowerCase().indexOf(query) >= 0
+    );
+    this.setState({
+      query,
+      searchResults: [...newPosts],
+    });
+  };
+
+  componentDidMount() {}
 
   render() {
     return (
       <BrowserRouter>
-        {/* <Background /> */}
         <NavBar />
-        <SearchBar />
+        <SearchBar handleSearch={this.handleSearch} />
         <Switch>
           <Route path='/' exact>
-            <PostList posts={this.state.posts} />
+            <PostList
+              posts={this.state.searchResults}
+              handleSelect={this.handleSelect}
+            />
           </Route>
           <Route path='/add' exact>
             <Form addPost={this.addPost} />

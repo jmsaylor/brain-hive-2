@@ -7,8 +7,10 @@ class SinglePost extends Component {
   constructor(props) {
     super(props);
     const { postId } = this.props.match.params;
+    const post = this.props.posts.filter((post) => post.id === postId);
+    console.log(postId, post);
     this.state = {
-      postId: postId,
+      post: post,
       showComments: false,
     };
   }
@@ -18,6 +20,7 @@ class SinglePost extends Component {
       showComments: !this.state.showComments,
     });
   };
+
   renderComments = (post) => {
     return post.comments.map((comment) => {
       return (
@@ -30,27 +33,44 @@ class SinglePost extends Component {
   };
 
   componentDidMount() {
-    console.log(this.state);
+    // console.log(this.state);
   }
 
+  renderYoutube = (post) => {
+    if (post.link.indexOf("youtube") >= 0) {
+      const marker = post.link.indexOf("?v=") + 3;
+      const videoId = post.link.substring(marker);
+      return (
+        <iframe
+          title='youtube'
+          src={`https://www.youtube.com/embed/${videoId}`}
+          width='500'
+          height='300'
+          frameborder='0'
+          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+          allowfullscreen></iframe>
+      );
+    } else if (post.link.indexOf("youtu.be") >= 0) {
+      const marker = post.link.indexOf(".be/") + 4;
+      const videoId = post.link.substring(marker);
+      return (
+        <iframe
+          title='youtube'
+          src={`https://www.youtube.com/embed/${videoId}`}
+          width='500'
+          height='300'
+          frameborder='0'
+          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+          allowfullscreen></iframe>
+      );
+    }
+  };
+
   renderPosts = () => {
-    const { postId } = this.state;
-    const regexDigits = /\d*/;
-    const regexWords = /^A-Z/;
-    let { posts } = this.props;
-    console.log(posts);
-    posts = postId.match(regexDigits)
-      ? posts.filter((element) => element.id === postId)
-      : posts;
-
-    posts = postId.match(regexWords)
-      ? posts.filter((element) => element.resourceType === postId)
-      : posts;
-
-    const display = posts.map((post) => {
+    const display = this.state.post.map((post) => {
       return (
         <div>
-          <Post post={post} key={post.key} />;
+          <Post post={post} key={post.key} />;{this.renderYoutube(post)}
           <Button onClick={() => this.clickHandler()}>
             {this.state.showComments ? "Click to Hide" : "Click to show"}
           </Button>
