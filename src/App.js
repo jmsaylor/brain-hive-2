@@ -6,14 +6,14 @@ import posts from "./mock/examplePosts";
 import SinglePost from "./components/SinglePost";
 import SearchBar from "./components/SearchBar";
 import Form from "./components/Form";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import Background from "./components/Background";
 class App extends Component {
   constructor(props) {
     super(props);
     let arr = [...posts];
     arr.forEach((element, idx) => {
-      element.key = idx;
+      element.key = String(idx);
       element.id = String(idx);
     });
     this.state = {
@@ -24,11 +24,10 @@ class App extends Component {
   }
 
   addPost = (post) => {
-    post.id = this.state.posts.length;
+    post.id = this.state.searchResults.length;
     console.log("post", post);
     this.setState({
-      ...this.state,
-      posts: [...this.state.posts, post],
+      searchResults: [...this.state.searchResults, post],
     });
   };
 
@@ -36,6 +35,7 @@ class App extends Component {
     let query = e.target.value;
     query = query.toLowerCase();
     const newPosts = this.state.posts.filter(
+      ...this.state,
       (post) =>
         post.title.toLowerCase().indexOf(query) >= 0 ||
         post.summary.toLowerCase().indexOf(query) >= 0 ||

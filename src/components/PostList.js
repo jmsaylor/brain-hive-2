@@ -6,15 +6,12 @@ const PostList = (props) => {
   const renderPosts = (param) => {
     const display = posts.map((post) => {
       return (
-        <div>
-          <Post
-            post={post}
-            id={post.id}
-            key={post.key}
-            handleSelect={props.handleSelect}
-          />
-          ;
-        </div>
+        <Post
+          post={post}
+          id={post.id}
+          key={post.key}
+          handleSelect={props.handleSelect}
+        />
       );
     });
     return display;

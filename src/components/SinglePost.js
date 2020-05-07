@@ -61,7 +61,7 @@ class SinglePost extends Component {
           height='300'
           frameborder='0'
           allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-          allowfullscreen></iframe>
+          allowFullScreen></iframe>
       );
     }
   };

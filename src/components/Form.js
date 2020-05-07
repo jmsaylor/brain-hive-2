@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+
 class PostForm extends Component {
   state = {
     posterName: "",
@@ -16,6 +18,7 @@ class PostForm extends Component {
     rating: "",
     comments: "",
   };
+
   handleChange = (e) => {
     // console.log(this.state);
     this.setState({
@@ -26,10 +29,18 @@ class PostForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const post = { ...this.state };
+    let post = { ...this.state };
     post.categories = post.categories.split(",");
     console.log("formPost", post);
     this.props.addPost(post);
+    // for (const prop in post) {
+    //   post[prop] = "";
+    // }
+    // this.setState({
+    //   ...post,
+    // });
+    // console.log("cleared", post);
+    // console.log("newstate", this.state);
   };
 
   render() {
