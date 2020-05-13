@@ -27,6 +27,7 @@ class App extends Component {
     post.id = this.state.searchResults.length;
     console.log("post", post);
     this.setState({
+      posts: [...this.state.posts, post],
       searchResults: [...this.state.searchResults, post],
     });
   };

@@ -1,7 +1,13 @@
 import React from "react";
 import Post from "./Post";
+import { connect } from "react-redux";
+import { increment } from "../actions";
 
 const PostList = (props) => {
+  const handleClick = () => {
+    props.increment(props.count);
+    console.log(props.count);
+  };
   const { posts } = props;
   const renderPosts = (param) => {
     const display = posts.map((post) => {
@@ -16,7 +22,19 @@ const PostList = (props) => {
     });
     return display;
   };
-  return <div className='postList'>{renderPosts()}</div>;
+  console.log("count", props.count);
+  return (
+    <div>
+      <div className='postList'>{renderPosts()}</div>
+      <div style={{ textAlign: "center" }}>
+        <p>{props.count}</p>
+        <button onClick={handleClick}>Count</button>
+      </div>
+    </div>
+  );
 };
 
-export default PostList;
+const mapStoretoProps = (store) => ({ count: store.count });
+const mapActionstoProps = () => ({ increment });
+
+export default connect(mapStoretoProps, mapActionstoProps())(PostList);
