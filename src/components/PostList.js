@@ -4,11 +4,18 @@ import { connect } from "react-redux";
 import { increment } from "../actions";
 
 const PostList = (props) => {
+
+  console.log("props is", props);
+  
+  const { posts , johnposts } = props;   // because of this you can access the length as posts.length
+
   const handleClick = () => {
-    props.increment(props.count);
+    props.increment(johnposts.count);
     console.log(props.count);
   };
-  const { posts } = props;
+
+
+  
   const renderPosts = (param) => {
     const display = posts.map((post) => {
       return (
@@ -22,7 +29,9 @@ const PostList = (props) => {
     });
     return display;
   };
-  console.log("count", props.count);
+
+    // i belive you are trying to get the count from your redux store.... so it would be johnposts.count
+  console.log("count", johnposts.count);
   return (
     <div>
       <div className='postList'>{renderPosts()}</div>
@@ -34,7 +43,9 @@ const PostList = (props) => {
   );
 };
 
-const mapStoretoProps = (store) => ({ count: store.count });
+// you have the reducer called posts... not count.....  so now you can access all your
+
+const mapStoretoProps = (store) => ({ johnposts: store.posts });
 const mapActionstoProps = () => ({ increment });
 
 export default connect(mapStoretoProps, mapActionstoProps())(PostList);

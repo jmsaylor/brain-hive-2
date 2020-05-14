@@ -58,8 +58,9 @@ class App extends Component {
         <Switch>
           <Route path='/' exact>
             <PostList
+            //idea of using redux is that you can fetch the data directly from the store instead of passing it from here
               posts={this.state.searchResults}
-              handleSelect={this.handleSelect}
+              handleSelect={this.handleSelect}  //handle select doesnt have any method... 
             />
           </Route>
           <Route path='/add' exact>
