@@ -34,7 +34,7 @@ const PostList = (props) => {
   );
 };
 
-const mapStoretoProps = (store) => ({ count: store.count });
+const mapStoretoProps = (store) => ({ count: store.posts });
 const mapActionstoProps = () => ({ increment });
 
 export default connect(mapStoretoProps, mapActionstoProps())(PostList);
