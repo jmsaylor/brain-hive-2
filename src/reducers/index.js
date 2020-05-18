@@ -1,12 +1,8 @@
 import { combineReducers } from "redux";
 import postReducer from "./postReducer";
+import formReducer from "./formReducer";
 
 export default combineReducers({
-
-
-  // in component this will be accessed as store.posts 
-
-
-  
+  newPost: formReducer,
   posts: postReducer,
 });

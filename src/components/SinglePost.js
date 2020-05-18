@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import Post from "./Post";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import Button from "./common/Button";
 
 class SinglePost extends Component {
   constructor(props) {
     super(props);
+    const posts = this.props.list;
     const { postId } = this.props.match.params;
-    const post = this.props.posts.filter((post) => post.id === postId);
+    const post = posts.filter((post) => post.id === postId);
     console.log(postId, post);
     this.state = {
       post: post,
@@ -86,4 +88,8 @@ class SinglePost extends Component {
   }
 }
 
-export default withRouter(SinglePost);
+const mapStoreToProps = (store) => {
+  return { list: store.list };
+};
+
+export default connect(mapStoreToProps)(withRouter(SinglePost));

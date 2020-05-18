@@ -6,7 +6,8 @@ import { increment } from "../actions";
 const PostList = (props) => {
   console.log("props is", props);
 
-  const { posts, reduxVar } = props; // because of this you can access the length as posts.length
+  const { list, reduxVar } = props; // because of this you can access the length as posts.length
+  let posts = list;
 
   const handleClick = () => {
     props.increment(reduxVar.count);
@@ -42,7 +43,10 @@ const PostList = (props) => {
 
 // you have the reducer called posts... not count.....  so now you can access all your
 
-const mapStoretoProps = (store) => ({ reduxVar: store.posts });
+const mapStoretoProps = (store) => ({
+  reduxVar: store.posts,
+  list: store.posts.list,
+});
 const mapActionstoProps = () => ({ increment });
 
 export default connect(mapStoretoProps, mapActionstoProps())(PostList);
