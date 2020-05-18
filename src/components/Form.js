@@ -17,6 +17,7 @@ class PostForm extends Component {
     timeToComplete: "",
     rating: "",
     comments: "",
+    likes: "",
   };
 
   handleChange = (e) => {
