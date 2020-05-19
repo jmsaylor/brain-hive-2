@@ -27,6 +27,7 @@ class Post extends Component {
     const { post } = this.props;
     return (
       <div
+        style={{ textAlign: "center" }}
         className='box'
         id={post.id}
         key={post.key}

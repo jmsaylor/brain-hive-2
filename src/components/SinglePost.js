@@ -5,17 +5,9 @@ import { connect } from "react-redux";
 import Button from "./common/Button";
 
 class SinglePost extends Component {
-  constructor(props) {
-    super(props);
-    const posts = this.props.list;
-    const { postId } = this.props.match.params;
-    const post = posts.filter((post) => post.id === postId);
-    console.log(postId, post);
-    this.state = {
-      post: post,
-      showComments: false,
-    };
-  }
+  state = {
+    showComments: false,
+  };
 
   clickHandler = () => {
     this.setState({
@@ -68,28 +60,32 @@ class SinglePost extends Component {
     }
   };
 
-  renderPosts = () => {
-    const display = this.state.post.map((post) => {
-      return (
-        <div>
-          <Post post={post} key={post.key} />;{this.renderYoutube(post)}
-          <Button onClick={() => this.clickHandler()}>
-            {this.state.showComments ? "Click to Hide" : "Click to show"}
-          </Button>
-          {this.state.showComments ? this.renderComments(post) : null}
-        </div>
-      );
-    });
-    return display;
-  };
-
   render() {
-    return <div className='postList'>{this.renderPosts()}</div>;
+    let posts = this.props.posts.list;
+    console.log("yep", posts);
+    let { postId } = this.props.match.params;
+    postId = parseInt(postId);
+    console.log(postId);
+    const postIndex = this.props.posts.list.findIndex(
+      (post) => (post.id = postId)
+    );
+    console.log("index", postIndex);
+    const post = this.props.posts.list[postIndex];
+    console.log("ok", post);
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Post post={post} key={post.key} />;{this.renderYoutube(post)}
+        <Button onClick={() => this.clickHandler()}>
+          {this.state.showComments ? "Click to Hide" : "Click to show"}
+        </Button>
+        {this.state.showComments ? this.renderComments(post) : null}
+      </div>
+    );
   }
 }
 
 const mapStoreToProps = (store) => {
-  return { list: store.list };
+  return { posts: store.posts };
 };
 
 export default connect(mapStoreToProps)(withRouter(SinglePost));

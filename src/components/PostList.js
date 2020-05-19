@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { increment } from "../actions";
 
 const PostList = (props) => {
-  console.log("props is", props);
-
   const { list, reduxVar } = props; // because of this you can access the length as posts.length
   let posts = list;
 

@@ -27,7 +27,10 @@ export default (store = INITIAL_STORE, action) => {
     case CHANGE_FORM:
       return {
         ...store,
-        [action.payload.field]: action.payload.value,
+        form: {
+          ...store.form,
+          [action.payload.field]: action.payload.value,
+        },
       };
     case SUBMIT_FORM:
       return {

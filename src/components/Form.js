@@ -1,31 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { changeForm, submitForm } from "../actions";
 
 class PostForm extends Component {
-  state = {
-    posterName: "",
-    resourceAuthor: "",
-    jobSkillLevel: "",
-    cohort: "",
-    title: "",
-    categories: "",
-    summary: "",
-    link: "",
-    resourceType: "",
-    datePublished: "",
-    videoLength: "",
-    timeToComplete: "",
-    rating: "",
-    comments: "",
-    likes: "",
-  };
-
   handleChange = (e) => {
-    // console.log(this.state);
-    this.setState({
-      ...this.state,
-      [e.target.id]: e.target.value,
-    });
+    this.props.changeForm(e.target.id, e.target.value);
+    console.log(this.props.newPost.form);
   };
 
   handleSubmit = (e) => {
@@ -45,6 +26,7 @@ class PostForm extends Component {
   };
 
   render() {
+    const { form } = this.props.newPost;
     return (
       <div>
         <form style={myStyles.form} onSubmit={(e) => this.handleSubmit(e)}>
@@ -54,7 +36,7 @@ class PostForm extends Component {
             type='text'
             id='posterName'
             placeholder='Your Name'
-            value={this.state.posterName}
+            value={form.posterName}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -62,11 +44,14 @@ class PostForm extends Component {
             type='text'
             id='resourceAuthor'
             placeholder='Author Name'
-            value={this.state.resourceAuthor}
+            value={form.resourceAuthor}
             onChange={(e) => this.handleChange(e)}
           />
           {/* dropdown skill level */}
-          <div style={myStyles.input}>
+          <div
+            style={myStyles.input}
+            id='jobSkillLevel'
+            value={form.jobSkillLevel}>
             <select>
               <option value='' disabled>
                 Author skill level
@@ -81,7 +66,7 @@ class PostForm extends Component {
             type='text'
             id='cohort'
             placeholder='Cohort #'
-            value={this.state.cohort}
+            value={form.cohort}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -89,7 +74,7 @@ class PostForm extends Component {
             type='text'
             id='title'
             placeholder='title'
-            value={this.state.title}
+            value={form.title}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -97,7 +82,7 @@ class PostForm extends Component {
             type='text'
             id='categories'
             placeholder='Categories (seperate multiple with commas)'
-            value={this.state.categories}
+            value={form.categories}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -105,7 +90,7 @@ class PostForm extends Component {
             type='text'
             id='link'
             placeholder='Resource Link'
-            value={this.state.link}
+            value={form.link}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -113,7 +98,7 @@ class PostForm extends Component {
             type='text'
             id='resourceType'
             placeholder='Resource Type'
-            value={this.state.resourceType}
+            value={form.resourceType}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -121,7 +106,7 @@ class PostForm extends Component {
             type='date'
             id='datePublished'
             placeholder='Published Date'
-            value={this.state.datePublished}
+            value={form.datePublished}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -129,7 +114,7 @@ class PostForm extends Component {
             type='text'
             id='videoLength'
             placeholder='Length of Video (optional)'
-            value={this.state.videoLength}
+            value={form.videoLength}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -137,7 +122,7 @@ class PostForm extends Component {
             type='text'
             id='timeToComplete'
             placeholder='Time to complete resource'
-            value={this.state.timeToComplete}
+            value={form.timeToComplete}
             onChange={(e) => this.handleChange(e)}
           />
           <input
@@ -145,7 +130,7 @@ class PostForm extends Component {
             type='text'
             id='rating'
             placeholder='1 to 5 rating'
-            value={this.state.rating}
+            value={form.rating}
             onChange={(e) => this.handleChange(e)}
           />
           <button type='submit'>Submit</button>
@@ -155,7 +140,13 @@ class PostForm extends Component {
   }
 }
 
-export default PostForm;
+const mapStoreToProps = (store) => ({ newPost: store.newPost });
+const mapActionsToProps = () => ({
+  changeForm,
+  submitForm,
+});
+
+export default connect(mapStoreToProps, mapActionsToProps())(PostForm);
 
 const myStyles = {
   form: {
