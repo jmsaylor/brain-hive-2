@@ -11,18 +11,7 @@ class PostForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let post = { ...this.state };
-    post.categories = post.categories.split(",");
-    console.log("formPost", post);
-    this.props.addPost(post);
-    // for (const prop in post) {
-    //   post[prop] = "";
-    // }
-    // this.setState({
-    //   ...post,
-    // });
-    // console.log("cleared", post);
-    // console.log("newstate", this.state);
+    this.props.submitForm(this.props.newPost.form);
   };
 
   render() {
