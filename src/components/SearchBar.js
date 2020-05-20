@@ -1,16 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
+import { changeSearch } from "../actions";
 // import { Redirect } from "react-router-dom";
 
 const SearchBar = (props) => {
   // console.log("***", this.props);
+  const handleSearch = (e) => {
+    props.changeSearch(e.target.value);
+    console.log(props.search);
+  };
   return (
-    // <div className='SearchBar'>
     <form className='SearchBar'>
-      <input type='text' onChange={(e) => props.handleSearch(e)} />
+      <input type='text' onChange={(e) => handleSearch(e)} />
       <button type='submit'>Search</button>
     </form>
-    // </div>
   );
 };
 
-export default SearchBar;
+const mapStoreToProps = (store) => ({ search: store.search });
+const mapActionsToProps = () => ({ changeSearch });
+
+export default connect(mapStoreToProps, mapActionsToProps())(SearchBar);
