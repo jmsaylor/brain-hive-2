@@ -6,8 +6,9 @@ import { changeSearch } from "../actions";
 const SearchBar = (props) => {
   // console.log("***", this.props);
   const handleSearch = (e) => {
-    props.changeSearch(e.target.value);
-    console.log(props.search);
+    // console.log(props.allPosts);
+    props.changeSearch(e.target.value, props.allPosts);
+    console.log(props.searchObj.search);
   };
   return (
     <form className='SearchBar'>
@@ -17,7 +18,10 @@ const SearchBar = (props) => {
   );
 };
 
-const mapStoreToProps = (store) => ({ search: store.search });
+const mapStoreToProps = (store) => ({
+  searchObj: store.search,
+  allPosts: store.posts.list,
+});
 const mapActionsToProps = () => ({ changeSearch });
 
 export default connect(mapStoreToProps, mapActionsToProps())(SearchBar);

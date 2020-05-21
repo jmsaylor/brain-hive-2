@@ -26,10 +26,6 @@ class SinglePost extends Component {
     });
   };
 
-  componentDidMount() {
-    // console.log(this.state);
-  }
-
   renderYoutube = (post) => {
     if (post.link.indexOf("youtube") >= 0) {
       const marker = post.link.indexOf("?v=") + 3;
@@ -40,9 +36,9 @@ class SinglePost extends Component {
           src={`https://www.youtube.com/embed/${videoId}`}
           width='500'
           height='300'
-          frameborder='0'
+          frameBorder='0'
           allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-          allowfullscreen></iframe>
+          allowFullScreen></iframe>
       );
     } else if (post.link.indexOf("youtu.be") >= 0) {
       const marker = post.link.indexOf(".be/") + 4;
@@ -53,7 +49,7 @@ class SinglePost extends Component {
           src={`https://www.youtube.com/embed/${videoId}`}
           width='500'
           height='300'
-          frameborder='0'
+          frameBorder='0'
           allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
           allowFullScreen></iframe>
       );
@@ -61,25 +57,22 @@ class SinglePost extends Component {
   };
 
   render() {
-    let posts = this.props.posts.list;
-    console.log("yep", posts);
     let { postId } = this.props.match.params;
     postId = parseInt(postId);
     console.log(postId);
-    const postIndex = this.props.posts.list.findIndex(
-      (post) => (post.id = postId)
-    );
-    console.log("index", postIndex);
-    const post = this.props.posts.list[postIndex];
+    let post = this.props.posts.list.filter((post) => post.id === postId);
     console.log("ok", post);
+    post = post[0];
     return (
-      <div style={{ textAlign: "center" }}>
+      // <div style={{ textAlign: "center" }}>
+      <div className='singlePost'>
         <Post post={post} key={post.key} />;{this.renderYoutube(post)}
         <Button onClick={() => this.clickHandler()}>
           {this.state.showComments ? "Click to Hide" : "Click to show"}
         </Button>
         {this.state.showComments ? this.renderComments(post) : null}
       </div>
+      // </div>
     );
   }
 }

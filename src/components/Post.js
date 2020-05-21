@@ -8,7 +8,6 @@ class Post extends Component {
   };
 
   handleClick = () => {
-    // this.props.handleSelect(this.props.post.id);
     this.setState({ clicked: !this.state.clicked });
   };
 
@@ -27,7 +26,6 @@ class Post extends Component {
     const { post } = this.props;
     return (
       <div
-        style={{ textAlign: "center" }}
         className='box'
         id={post.id}
         key={post.key}
@@ -42,8 +40,10 @@ class Post extends Component {
           </div>
         ) : null}
         <p>Description: {post.summary}</p>
-        <p>Rating: {post.rating}</p>
-        <Rating post={post} />
+        <div className='rating'>
+          <p>Rating: {post.rating}</p>
+          <Rating post={post} />
+        </div>
         <p>Comments: {post.comments.length}</p>
         <p>Categories: {this.renderCategories(post)}</p>
       </div>

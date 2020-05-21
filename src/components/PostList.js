@@ -4,35 +4,33 @@ import { connect } from "react-redux";
 import { increment } from "../actions";
 
 const PostList = (props) => {
-  const { list, reduxVar } = props; // because of this you can access the length as posts.length
-  let posts = list;
+  let posts = [];
+  const { originalPosts, searchObj } = props; // because of this you can access the length as posts.length
+  if (searchObj.search !== "") {
+    posts = searchObj.list;
+  } else {
+    posts = originalPosts.list;
+  }
+  // posts = originalPosts.list;
+  console.log(posts);
 
   const handleClick = () => {
-    props.increment(reduxVar.count);
+    props.increment(originalPosts.count);
     // console.log(props.count);
   };
 
-  const renderPosts = (param) => {
+  const renderPosts = () => {
     const display = posts.map((post) => {
-      return (
-        <Post
-          post={post}
-          id={post.id}
-          key={post.key}
-          handleSelect={props.handleSelect}
-        />
-      );
+      return <Post post={post} key={post.key} />;
     });
     return display;
   };
 
-  // i belive you are trying to get the count from your redux store.... so it would be johnposts.count
-  console.log("count", reduxVar.count);
   return (
     <div>
       <div className='postList'>{renderPosts()}</div>
       <div style={{ textAlign: "center" }}>
-        <p>{reduxVar.count}</p>
+        <p>{originalPosts.count}</p>
         <button onClick={handleClick}>Count</button>
       </div>
     </div>
@@ -42,8 +40,8 @@ const PostList = (props) => {
 // you have the reducer called posts... not count.....  so now you can access all your
 
 const mapStoretoProps = (store) => ({
-  reduxVar: store.posts,
-  list: store.posts.list,
+  originalPosts: store.posts,
+  searchObj: store.search,
 });
 const mapActionstoProps = () => ({ increment });
 

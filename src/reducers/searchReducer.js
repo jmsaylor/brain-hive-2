@@ -4,6 +4,7 @@ const INITIAL_STORE = {
   search: "",
   loading: false,
   errors: {},
+  list: [],
 };
 
 export default (store = INITIAL_STORE, action) => {
@@ -11,7 +12,8 @@ export default (store = INITIAL_STORE, action) => {
     case CHANGE_SEARCH:
       return {
         ...store,
-        search: action.payload,
+        search: action.payload.search,
+        list: action.payload.list,
       };
     default:
       return store;
