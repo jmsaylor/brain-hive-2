@@ -6,6 +6,17 @@ body {
   background-size: 100px 100px;
   background-position: 0 0, 33px 33px, -33px -33px;
 }
+
+iframe {
+  margin: auto;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .App {
   text-align: center;
   margin: 0 8%;
@@ -42,6 +53,8 @@ body {
 }
 
 .box {
+  display: flex;
+  flex-direction: column;
   border: 12px solid rgba(180, 255, 220, 0.075);
   border-radius: 12px;
   border-bottom-width: 1px;
@@ -52,6 +65,7 @@ body {
   max-width: 700px;
   background-color: rgba(252, 252, 252, 0.9);
   text-align: center;
+  /* margin: auto; */
 }
 
 .postList {
@@ -67,6 +81,10 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  /* margin: auto; */
+}
+
+.singlePost .box {
   margin: auto;
 }
 
